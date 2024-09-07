@@ -5,30 +5,31 @@
     
     $conex = connection();
 
-    //CHECK DE LA CONEXION
-    if(mysqli_connect_errno()) {
-        printf("Connect failed: %s\n", mysqli_connect_error());
-        exit();
-    }
+   
 
-    $sql = "SELECT * FROM empleado";
-    $query_row = mysqli_query($conex, $sql);
+    if (isset($_POST['Contrasena']) && !empty($_POST['Contrasena'])) {
+        $codigo = trim($_POST['Contrasena']);
+        
+        // Preparar la consulta usando una consulta preparada de PDO
+        $stmt = $conex->prepare('SELECT * FROM empleado WHERE EM_CODIGO = :codigo');
+        
+        // Enlazar el parámetro de la consulta para evitar inyección SQL
+        $stmt->bindParam(':codigo', $codigo, PDO::PARAM_STR);
+        
+        // Ejecutar la consulta
+        $stmt->execute();
 
-    if(isset($_POST['Contrasena'])){
-        if(strlen($_POST['Contrasena']) >= 1){
-            $password = trim($_POST['Contrasena']);
-            $sql_pass = "SELECT * FROM empleado WHERE ID_EMP = $password";
-            $result = mysqli_query($conex, $sql_pass);
+        // Obtener el resultado
+        $user = $stmt->fetch();
 
-            if($result->num_rows > 0){
-                $user_data = mysqli_fetch_assoc($result);
-
-                if(password_verify($password, $user_data['ID_EMP'])){
-                    session_start();
-                    header("Location: AltaTrabajo.php");
-                    exit();
-                }
-            }
+        if ($user) {
+            // Usuario encontrado, iniciar sesión y redirigir
+            $_SESSION['usuario'] = $user; // Puedes almacenar más información si es necesario
+            header("Location: AltaTrabajo.html");
+            exit();
+        } else {
+            // Usuario no encontrado, mostrar mensaje de error
+            echo "<p>Código incorrecto</p>";
         }
     }
 ?>
@@ -43,7 +44,7 @@
 </head>
 <body>
     <div id="log_Container" class="log_Container">
-        <form action="AltaTrabajo.html">
+        <form method="post">
             <div class="contrasena">
                 <input spellcheck="false" class="control" id="password" type="password" placeholder="Código de Usuario" name="Contrasena">
                 <button class="toggle" type="button" onclick="togglePassword(this)"></button>
