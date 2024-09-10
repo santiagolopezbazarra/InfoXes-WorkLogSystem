@@ -1,5 +1,20 @@
+<?php
+    include('../IMPORT/conex_emp.php');
+        
+    $conex = connection();
+    
+    $sql = "SELECT * FROM obra";
+
+    try {
+        $stmt = $conex->query($sql);
+        $empresas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "Error al ejecutar la consulta: " . $e->getMessage();
+        exit();
+    }
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +24,13 @@
 <body onload="cargarDia()">
     <h1 id="elementoFecha"></h1>
     <select name="obras" id="obras">
-        <option value="OB-01">obra 1</option>
-        <option value="OB-02">obra 2</option>
+        <?php
+          // Recorre el array $empresas obtenido desde la base de datos
+          foreach($empresas as $empresa) {
+            // Para cada empresa, crea una opción con el nombre de la razón social
+            echo "<option value='".$empresa['OB_NOMBRE']."'>";
+          }
+        ?>
     </select>
     <input type="time" name="horaEntrada" id="horaEntrada">
     <input type="time" name="horaSalida" id="horaSalida">
@@ -34,3 +54,6 @@
     <script src="../JS/AltaTrabajo.js"></script>
 </body>
 </html>
+
+<option value="OB-01">obra 1</option>
+<option value="OB-02">obra 2</option>
