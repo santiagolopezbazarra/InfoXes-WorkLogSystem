@@ -25,7 +25,7 @@
         if ($user) {
             // Usuario encontrado, iniciar sesión y redirigir
             $_SESSION['usuario'] = $user; // Puedes almacenar más información si es necesario
-            header("Location: AltaTrabajo.html");
+            header("Location: AltaTrabajo.php");
             exit();
         } else {
             // Usuario no encontrado, mostrar mensaje de error
