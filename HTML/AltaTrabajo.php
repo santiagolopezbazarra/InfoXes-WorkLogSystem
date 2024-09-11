@@ -54,6 +54,3 @@
     <script src="../JS/AltaTrabajo.js"></script>
 </body>
 </html>
-
-<option value="OB-01">obra 1</option>
-<option value="OB-02">obra 2</option>
