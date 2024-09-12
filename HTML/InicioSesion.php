@@ -24,7 +24,11 @@
 
         if ($user) {
             // Usuario encontrado, iniciar sesión y redirigir
-            $_SESSION['usuario'] = $user; // Puedes almacenar más información si es necesario
+            $_SESSION['usuario'] = $user;
+            echo "<pre>";
+            print_r($_SESSION['usuario']);
+            echo "</pre>";
+            // Después de depurar, puedes redirigir
             header("Location: AltaTrabajo.php");
             exit();
         } else {

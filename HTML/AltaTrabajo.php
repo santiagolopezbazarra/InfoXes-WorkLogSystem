@@ -1,5 +1,12 @@
 <?php
+    session_start();
     include('../IMPORT/conex_emp.php');
+
+    if (!isset($_SESSION['usuario'])) {
+        // Redirigir a la página de inicio de sesión si no hay una sesión activa
+        header("Location: InicioSesion.php");
+        exit();
+    }
         
     $conex = connection();
     
@@ -29,40 +36,43 @@
 </head>
 <body onload="cargarDia()">
     <h1 id="elementoFecha"></h1>
-    <select name="obras" id="obras">
-        <option value="" disabled selected>Selecciona una obra</option>
-        <?php
-        // Recorremos el array $obras
-        foreach($obras as $obra) {
-            // Para cada obra, generamos una opción con el nombre visible entre las etiquetas option
-            echo "<option value='" . htmlspecialchars($obra['OB_NOMBRE']) . "'>" . htmlspecialchars($obra['OB_NOMBRE']) . "</option>";
-        }
-        ?>
-    </select>
-    <input type="time" name="horaEntrada" id="horaEntrada">
-    <input type="time" name="horaSalida" id="horaSalida">
-    <select name="maquinas" id="maquinas">
-        <option value="" disabled selected>Selecciona una maquina</option>
-        <?php
-        // Recorremos el array $obras
-        foreach($maquinarias as $maquinaria) {
-            // Para cada obra, generamos una opción con el nombre visible entre las etiquetas option
-            echo "<option value='" . htmlspecialchars($maquinaria['MA_NOMBRE']) . "'>" . htmlspecialchars($maquinaria['MA_NOMBRE']) . "</option>";
-        }
-        ?>
-    </select>
-    <button class="observaciones">OBSERVACIONES</button>
-    <button class="enviar">ENVIAR</button>
 
-    <!-- Estructura del modal -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>OBSERVACIONES</h2>
-            <textarea id="observacionesText" rows="5" placeholder="Escribe tus observaciones aquí..."></textarea>
-            <button id="guardarObservaciones">Guardar</button>
+    <!-- Formulario para el registro de datos -->
+    <form action="../IMPORT/procesar_registro.php" method="POST">
+        <select name="obra" id="obras" required>
+            <option value="" disabled selected>Selecciona una obra</option>
+            <?php
+            foreach($obras as $obra) {
+                echo "<option value='" . htmlspecialchars($obra['OB_ID']) . "'>" . htmlspecialchars($obra['OB_NOMBRE']) . "</option>";
+            }
+            ?>
+        </select>
+
+        <input type="time" name="horaEntrada" id="horaEntrada" required>
+        <input type="time" name="horaSalida" id="horaSalida" required>
+
+        <select name="maquinaria" id="maquinas" required>
+            <option value="" disabled selected>Selecciona una maquina</option>
+            <?php
+            foreach($maquinarias as $maquinaria) {
+                echo "<option value='" . htmlspecialchars($maquinaria['MA_ID']) . "'>" . htmlspecialchars($maquinaria['MA_NOMBRE']) . "</option>";
+            }
+            ?>
+        </select>
+
+        <button class="observaciones">OBSERVACIONES</button>
+        <button type="submit" class="enviar">ENVIAR</button>
+
+        <!-- Estructura del modal -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>OBSERVACIONES</h2>
+                <textarea id="observacionesText" rows="5" placeholder="Escribe tus observaciones aquí..."></textarea>
+                <button id="guardarObservaciones">Guardar</button>
+            </div>
         </div>
-    </div>
+    </form>
 
     <script src="../JS/AltaTrabajo.js"></script>
 </body>
