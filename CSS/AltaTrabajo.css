@@ -1,74 +1,95 @@
 /* Estilo general */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
     background-color: #f5f5f5;
     margin: 0;
-    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    color: #333;
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: #333;
     margin-bottom: 20px;
+    text-align: center;
 }
 
-select, input[type="time"] {
+/* Estilo del formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    max-width: 400px;
-    padding: 10px;
-    margin: 10px 0;
+    max-width: 450px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para los selects e inputs de tiempo */
+select, input[type="time"], textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 1rem;
     background-color: #ffffff;
     box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+select:focus, input[type="time"]:focus, textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Evitar redimensionamiento de textarea */
+textarea {
+    resize: none; /* Esto evita que el textarea sea redimensionable */
+}
+
+/* Botones generales */
+button {
+    font-size: 1rem;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin: 12px 0;
 }
 
 /* Botón de Observaciones */
 button.observaciones {
-    background-color: #298900; /* Color distinto */
+    background-color: #298900; /* Color principal */
     color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%;
-    max-width: 400px;
-    margin-top: 20px;
 }
 
 button.observaciones:hover {
     background-color: #195400; /* Color más oscuro al hacer hover */
 }
 
-/* Botón de Enviar (por defecto) */
+/* Botón de Enviar */
 button.enviar {
     background-color: #0014cd;
     color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%;
-    max-width: 400px;
-    margin-top: 20px;
 }
 
 button.enviar:hover {
     background-color: #000b69; /* Color más oscuro al hacer hover */
 }
 
-/* Estilos del modal */
 .modal {
     display: none; /* Oculto por defecto */
-    position: fixed;
+    position: fixed; /* Fijo para cubrir toda la pantalla */
     z-index: 1000;
     left: 0;
     top: 0;
@@ -77,16 +98,18 @@ button.enviar:hover {
     background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
     justify-content: center;
     align-items: center;
+    overflow: hidden; /* Para evitar el scroll si es necesario */
 }
 
 .modal-content {
     background-color: #ffffff;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 10px;
     width: 90%;
-    max-width: 400px;
+    max-width: 500px;
     text-align: center;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    position: relative;
 }
 
 .modal-content h2 {
@@ -95,21 +118,29 @@ button.enviar:hover {
 
 .modal-content textarea {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 4px;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 6px;
     border: 1px solid #ccc;
     box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    resize: none; /* Evitar redimensionamiento */
+}
+
+.modal-content textarea:focus {
+    border-color: #007bff;
+    outline: none;
 }
 
 .modal-content button {
     background-color: #0014cd;
     color: white;
-    padding: 10px 20px;
+    padding: 12px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 1rem;
+    margin-top: 12px;
 }
 
 .modal-content button:hover {
@@ -119,10 +150,11 @@ button.enviar:hover {
 /* Botón de cerrar */
 .close {
     position: absolute;
-    top: 10px;
-    right: 20px;
+    top: 12px;
+    right: 16px;
     font-size: 1.5rem;
     cursor: pointer;
+    color: #333;
 }
 
 /* Estilos responsivos */
@@ -133,13 +165,17 @@ button.enviar:hover {
     }
 
     h1 {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
     }
 
     select, input[type="time"], button {
         font-size: 1rem;
         padding: 10px;
-        max-width: 100%;
+        width: 100%;
+    }
+
+    form {
+        width: 90%;
     }
 }
 
@@ -150,12 +186,16 @@ button.enviar:hover {
     }
 
     h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
 
     select, input[type="time"], button {
         font-size: 1.1rem;
         padding: 12px;
+    }
+
+    form {
+        width: 80%;
     }
 }
 
@@ -172,7 +212,10 @@ button.enviar:hover {
     select, input[type="time"], button {
         font-size: 1.2rem;
         padding: 14px;
-        max-width: 400px;
+    }
+
+    form {
+        width: 100%;
+        max-width: 500px;
     }
 }
-

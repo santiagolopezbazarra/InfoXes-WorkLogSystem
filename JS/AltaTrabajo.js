@@ -2,6 +2,7 @@
 const modal = document.getElementById("modal");
 const observacionesButton = document.querySelector(".observaciones");
 const closeModalButton = document.querySelector(".close");
+const saveModal = document.querySelector(".saveModal");
 
 // Cuando el usuario haga clic en el botón de Observaciones, abrir el modal
 observacionesButton.addEventListener("click", () => {
@@ -10,6 +11,10 @@ observacionesButton.addEventListener("click", () => {
 
 // Cuando el usuario haga clic en el botón de cerrar (x), cerrar el modal
 closeModalButton.addEventListener("click", () => {
+    modal.style.display = "none"; // Ocultar el modal
+});
+
+saveModal.addEventListener("click", () => {
     modal.style.display = "none"; // Ocultar el modal
 });
 

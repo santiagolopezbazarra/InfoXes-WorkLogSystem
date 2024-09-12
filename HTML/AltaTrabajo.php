@@ -26,6 +26,7 @@
         exit();
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -60,7 +61,9 @@
             ?>
         </select>
 
-        <button class="observaciones">OBSERVACIONES</button>
+        <input type="hidden" name="observaciones" id="hiddenObservaciones"> <!-- Campo oculto -->
+
+        <button type="button" class="observaciones">OBSERVACIONES</button>
         <button type="submit" class="enviar">ENVIAR</button>
 
         <!-- Estructura del modal -->
@@ -68,8 +71,8 @@
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>OBSERVACIONES</h2>
-                <textarea id="observacionesText" rows="5" placeholder="Escribe tus observaciones aquí..."></textarea>
-                <button id="guardarObservaciones">Guardar</button>
+                <textarea id="textareaObservaciones" rows="5" placeholder="Escribe tus observaciones aquí..."></textarea>
+                <button type="button" id="saveModal" class="saveModal">Guardar</button>
             </div>
         </div>
     </form>
