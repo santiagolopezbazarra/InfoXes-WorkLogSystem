@@ -32,10 +32,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../IMG/Humberto_logo_recortado.png" mce_href="favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="../CSS/AltaTrabajo.css">
     <title>INFOXES</title>
 </head>
 <body onload="cargarDia()">
+    <img src="../IMG/Humberto_logo.png" alt="Logo de la empresa">
     <h1 id="elementoFecha"></h1>
 
     <!-- Formulario para el registro de datos -->

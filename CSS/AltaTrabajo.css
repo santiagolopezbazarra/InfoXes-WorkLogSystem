@@ -10,9 +10,14 @@ body {
     color: #333;
 }
 
+img {
+    width: 200px;
+}
+
 h1 {
     font-size: 2.2rem;
     color: #333;
+    margin-top: 30px;
     margin-bottom: 20px;
     text-align: center;
 }
@@ -180,6 +185,11 @@ button.enviar:hover {
 
     form {
         width: 90%;
+    }
+
+    .modal-content {
+        width: 95%; /* Para dispositivos más pequeños */
+        max-width: 80%;
     }
 }
 
