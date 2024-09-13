@@ -71,7 +71,7 @@
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>OBSERVACIONES</h2>
-                <textarea id="textareaObservaciones" rows="5" placeholder="Escribe tus observaciones aquí..."></textarea>
+                <textarea id="textareaObservaciones" name="observaciones" rows="5" placeholder="Escribe tus observaciones aquí..."></textarea>
                 <button type="button" id="saveModal" class="saveModal">Guardar</button>
             </div>
         </div>
