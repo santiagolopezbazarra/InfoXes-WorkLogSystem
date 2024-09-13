@@ -124,11 +124,16 @@ button.enviar:hover {
     box-sizing: border-box;
     transition: border-color 0.3s ease;
     resize: none; /* Evitar redimensionamiento */
+    font-family: 'Roboto', Arial, sans-serif;
 }
 
 .modal-content textarea:focus {
     border-color: #007bff;
     outline: none;
+}
+
+.modal-content textarea::placeholder{
+    font-family: 'Roboto', Arial, sans-serif;
 }
 
 .modal-content button {

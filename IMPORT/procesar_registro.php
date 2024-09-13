@@ -1,6 +1,7 @@
 <?php
     session_start();
     include('../IMPORT/conex_emp.php');
+    date_default_timezone_set("Europe/Madrid");
 
     // Verificar si el formulario ha sido enviado
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
