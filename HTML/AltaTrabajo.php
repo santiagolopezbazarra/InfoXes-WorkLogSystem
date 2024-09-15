@@ -65,19 +65,27 @@
 
         <input type="hidden" name="observaciones" id="hiddenObservaciones"> <!-- Campo oculto -->
 
-        <button type="button" class="observaciones">OBSERVACIONES</button>
+        <button type="button" class="observaciones" id="botonObservaciones">OBSERVACIONES</button>
         <button type="submit" class="enviar">ENVIAR</button>
 
         <!-- Estructura del modal -->
         <div id="modal" class="modal">
             <div class="modal-content">
-                <span class="close">&times;</span>
+                <span id="cerrarModal" class="close">&times;</span>
                 <h2>OBSERVACIONES</h2>
                 <textarea id="textareaObservaciones" name="observaciones" rows="5" placeholder="Escribe tus observaciones aquí..."></textarea>
                 <button type="button" id="saveModal" class="saveModal">Guardar</button>
             </div>
         </div>
     </form>
+
+    <!--Estructura modal registro completado/fallido-->
+    <div id="modalResultado" class="modal">
+        <div class="modal-content">
+            <h2 id="mensajeResultado"></h2>
+            <button id="closeResultado">Cerrar</button>
+        </div>
+    </div>
 
     <script src="../JS/AltaTrabajo.js"></script>
 </body>

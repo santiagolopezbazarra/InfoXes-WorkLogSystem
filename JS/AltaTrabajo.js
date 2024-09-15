@@ -1,7 +1,7 @@
 // Obtener los elementos del DOM
 const modal = document.getElementById("modal");
-const observacionesButton = document.querySelector(".observaciones");
-const closeModalButton = document.querySelector(".close");
+const observacionesButton = document.getElementById("botonObservaciones");
+const closeModalButton = document.getElementById("cerrarModal");
 const saveModal = document.querySelector(".saveModal");
 
 // Cuando el usuario haga clic en el botón de Observaciones, abrir el modal
@@ -25,6 +25,32 @@ window.addEventListener("click", (event) => {
     }
 });
 
+const modalResultado = document.getElementById("modalResultado");
+const closeResultadoButton = document.getElementById("closeResultado");
+const mensajeResultado = document.getElementById("mensajeResultado");
+
+closeResultadoButton.addEventListener("click", () => {
+    modalResultado.style.display = "none"; // Ocultar el modal
+});
+
+window.addEventListener("click", (event) => {
+    if (event.target === modalResultado) {
+        modalResultado.style.display = "none"; // Ocultar el modal
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const params = new URLSearchParams(window.location.search);
+    const status = params.get('status');
+
+    if (status === 'success') {
+        mensajeResultado.textContent = "REGISTRO COMPLETADO";
+        modalResultado.style.display = "flex";
+    } else if (status === 'error') {
+        mensajeResultado.textContent = "ERROR AL REGISTRAR";
+        modalResultado.style.display = "flex";
+    }
+});
 
 function cargarDia(){
     let elementoFecha = document.getElementById("elementoFecha");

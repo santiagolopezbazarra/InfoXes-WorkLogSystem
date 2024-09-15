@@ -1,6 +1,7 @@
 <?php
     session_start();
     include('../IMPORT/conex_emp.php');
+
     date_default_timezone_set("Europe/Madrid");
 
     // Verificar si el formulario ha sido enviado
@@ -39,16 +40,19 @@
 
             // Ejecutar la consulta
             if ($stmt->execute()) {
-                echo "Registro guardado correctamente.";
-                // Aquí puedes redirigir al usuario a una página de confirmación si es necesario.
+                header("Location: ../HTML/AltaTrabajo.php?status=success");
+                exit();
             } else {
-                echo "Error al guardar el registro.";
+                header("Location: ../HTML/AltaTrabajo.php?status=error");
+                exit();
             }
 
         } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
+            header("Location: ../HTML/AltaTrabajo.php?status=error");
+            exit();
         }
     } else {
-        echo "Método de solicitud no válido.";
+        header("Location: ../HTML/AltaTrabajo.php?status=error");
+        exit();
     }
 ?>
