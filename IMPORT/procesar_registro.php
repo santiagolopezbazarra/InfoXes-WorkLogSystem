@@ -17,37 +17,49 @@
         $fecha = date("Y-m-d");
         $horaRegistro = date("H:i:s");
 
-        // Conexión a la base de datos
-        $conex = connection();
-
-        // SQL para insertar los datos en la tabla "registro_trabajo"
-        $sqlInsert = "INSERT INTO registro_trabajo (RT_FECHA, RT_HENTRADA, RT_HSALIDA, RT_OBSERVACION, RT_EMPLEADO, RT_OBRA, RT_MAQUINARIA, RT_HREGISTRO)
-                      VALUES (:fecha, :horaEntrada, :horaSalida, :observaciones, :empleado, :obra, :maquinaria, :horaRegistro)";
-
-        try {
-            // Preparar la consulta
-            $stmt = $conex->prepare($sqlInsert);
-
-            // Asociar los valores a los parámetros
+        $diffHoras = strtotime($horaSalida) - strtotime($horaEntrada);
+        
+        if($diffHoras > 0) {
+            // Conexión a la base de datos
+            $conex = connection();
+            $sqlConsulta = "SELECT * FROM registro_trabajo WHERE RT_FECHA = :fecha AND RT_EMPLEADO = :empleado";
             $stmt->bindParam(':fecha', $fecha);
-            $stmt->bindParam(':horaEntrada', $horaEntrada);
-            $stmt->bindParam(':horaSalida', $horaSalida);
-            $stmt->bindParam(':observaciones', $observaciones);
             $stmt->bindParam(':empleado', $empleado);
-            $stmt->bindParam(':obra', $obra);
-            $stmt->bindParam(':maquinaria', $maquinaria);
-            $stmt->bindParam(':horaRegistro', $horaRegistro);
-
-            // Ejecutar la consulta
-            if ($stmt->execute()) {
-                header("Location: ../HTML/AltaTrabajo.php?status=success");
-                exit();
+            $stmtConsulta->execute();
+            if($stmtConsulta->rowCount() > 0){
+                
             } else {
-                header("Location: ../HTML/AltaTrabajo.php?status=error");
-                exit();
+                // SQL para insertar los datos en la tabla "registro_trabajo"
+                $sqlInsert = "INSERT INTO registro_trabajo (RT_FECHA, RT_HENTRADA, RT_HSALIDA, RT_OBSERVACION, RT_EMPLEADO, RT_OBRA, RT_MAQUINARIA, RT_HREGISTRO)
+                              VALUES (:fecha, :horaEntrada, :horaSalida, :observaciones, :empleado, :obra, :maquinaria, :horaRegistro)";
+        
+                try {
+                    // Preparar la consulta
+                    $stmt = $conex->prepare($sqlInsert);
+        
+                    // Asociar los valores a los parámetros
+                    $stmt->bindParam(':horaEntrada', $horaEntrada);
+                    $stmt->bindParam(':horaSalida', $horaSalida);
+                    $stmt->bindParam(':observaciones', $observaciones);
+                    $stmt->bindParam(':obra', $obra);
+                    $stmt->bindParam(':maquinaria', $maquinaria);
+                    $stmt->bindParam(':horaRegistro', $horaRegistro);
+        
+                    // Ejecutar la consulta
+                    if ($stmt->execute()) {
+                        header("Location: ../HTML/AltaTrabajo.php?status=success");
+                        exit();
+                    } else {
+                        header("Location: ../HTML/AltaTrabajo.php?status=error");
+                        exit();
+                    }
+        
+                } catch (PDOException $e) {
+                    header("Location: ../HTML/AltaTrabajo.php?status=error");
+                    exit();
+                }
             }
-
-        } catch (PDOException $e) {
+        } else {
             header("Location: ../HTML/AltaTrabajo.php?status=error");
             exit();
         }
