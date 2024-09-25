@@ -17,9 +17,14 @@
         $fecha = date("Y-m-d");
         $horaRegistro = date("H:i:s");
 
-        $validacion = validar_fichaje($horaEntrada, $horaSalida);
+        if (!validar_fichaje($horaEntrada, $horaSalida)) {
+            header("Location: ../HTML/AltaTrabajo.php?status=error");
+            exit();    
+        }
 
-        if($validacion) {
+        $validacion = validar_nuevo_fichaje($empleado, $horaEntrada, $horaSalida, $fecha);
+
+        if($validacion === "CORRECTO") {
             // Conexión a la base de datos
             $conex = connection();
     
@@ -113,5 +118,36 @@
         }
         
         return false; // No hay solapamiento parcial
+    }
+
+    function obtener_fichajes_del_dia($empleado, $fecha) {
+        $conex = connection();
+        $sql = "SELECT RT_HENTRADA, RT_HSALIDA FROM registro_trabajo WHERE RT_EMPLEADO = :empleado AND RT_FECHA = :fecha ORDER BY RT_HENTRADA ASC;";
+
+        $stmt = $conex->prepare($sql);
+        $stmt->bindParam(':empleado', $empleado);
+        $stmt->bindParam(':fecha', $fecha);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function validar_nuevo_fichaje($empleado, $horaEntrada, $horaSalida, $fecha) {
+        $fichajes = obtener_fichajes_del_dia($empleado, $fecha);
+
+        foreach($fichajes as $fichaje) {
+            $entrada_existente = $fichaje['RT_HENTRADA'];
+            $salida_existente = $fichaje['RT_HSALIDA'];
+
+            if (fichaje_dentro_de_otro($entrada_existente, $salida_existente, $horaEntrada, $horaSalida)) {
+                return "ERROR";
+            }
+
+            if (fichajes_se_solapan($entrada_existente, $salida_existente, $horaEntrada, $horaSalida)) {
+                return "ERROR";
+            }
+        }
+
+        return "CORRECTO";
     }
 ?>
