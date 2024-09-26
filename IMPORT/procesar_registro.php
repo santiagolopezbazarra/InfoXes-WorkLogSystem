@@ -63,11 +63,13 @@
                 header("Location: ../HTML/AltaTrabajo.php?status=error");
                 exit();
             }
-        } else {
-            header("Location: ../HTML/AltaTrabajo.php?status=error");
+        } else if ($validacion === "ERROR_FICHAJE_DENTRO_OTRO") {
+            header("Location: ../HTML/AltaTrabajo.php?status=errorFichajeDentroOtro");
             exit();    
+        } else if ($validacion === "ERROR_FICHAJE_SOLAPADO") {
+            header("Location: ../HTML/AltaTrabajo.php?status=errorFichajeSolapado");
+            exit();
         }
-
     } else {
         echo "Método de solicitud no válido.";
         header("Location: ../HTML/AltaTrabajo.php?status=error");
@@ -140,11 +142,11 @@
             $salida_existente = $fichaje['RT_HSALIDA'];
 
             if (fichaje_dentro_de_otro($entrada_existente, $salida_existente, $horaEntrada, $horaSalida)) {
-                return "ERROR";
+                return "ERROR_FICHAJE_DENTRO_OTRO";
             }
 
             if (fichajes_se_solapan($entrada_existente, $salida_existente, $horaEntrada, $horaSalida)) {
-                return "ERROR";
+                return "ERROR_FICHAJE_SOLAPADO";
             }
         }
 

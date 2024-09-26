@@ -49,6 +49,12 @@ document.addEventListener("DOMContentLoaded", function() {
     } else if (status === 'error') {
         mensajeResultado.textContent = "ERROR AL REGISTRAR";
         modalResultado.style.display = "flex";
+    } else if (status === 'errorFichajeDentroOtro') {
+        mensajeResultado.textContent = "ERROR AL REGISTRAR";
+        modalResultado.style.display = "flex";
+    } else if (status === 'errorFichajeSolapado') {
+        mensajeResultado.textContent = "ERROR AL REGISTRAR";
+        modalResultado.style.display = "flex";
     }
 });
 
