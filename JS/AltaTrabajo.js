@@ -28,6 +28,7 @@ window.addEventListener("click", (event) => {
 const modalResultado = document.getElementById("modalResultado");
 const closeResultadoButton = document.getElementById("closeResultado");
 const mensajeResultado = document.getElementById("mensajeResultado");
+const descripcionResultado = document.getElementById("descripcionResultado");
 
 closeResultadoButton.addEventListener("click", () => {
     modalResultado.style.display = "none"; // Ocultar el modal
@@ -44,16 +45,21 @@ document.addEventListener("DOMContentLoaded", function() {
     const status = params.get('status');
 
     if (status === 'success') {
+        console.log("pasa por aqui");
         mensajeResultado.textContent = "REGISTRO COMPLETADO";
+        descripcionResultado.textContent = "El registro se ha realizado con éxito"
         modalResultado.style.display = "flex";
     } else if (status === 'error') {
         mensajeResultado.textContent = "ERROR AL REGISTRAR";
+        descripcionResultado.textContent = "";
         modalResultado.style.display = "flex";
     } else if (status === 'errorFichajeDentroOtro') {
         mensajeResultado.textContent = "ERROR AL REGISTRAR";
+        descripcionResultado.textContent = "Las horas seleccionadas ya están registradas"
         modalResultado.style.display = "flex";
     } else if (status === 'errorFichajeSolapado') {
         mensajeResultado.textContent = "ERROR AL REGISTRAR";
+        descripcionResultado.textContent = "La hora de entrada de entrada o de salida ya pertenece a un registro"
         modalResultado.style.display = "flex";
     }
 });

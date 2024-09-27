@@ -11,7 +11,7 @@
         $codigo = trim($_POST['Contrasena']);
         
         // Preparar la consulta usando una consulta preparada de PDO
-        $stmt = $conex->prepare('SELECT * FROM empleado WHERE EM_CODIGO = :codigo');
+        $stmt = $conex->prepare('SELECT * FROM trabajadores WHERE tr_codigo = :codigo');
         
         // Enlazar el parámetro de la consulta para evitar inyección SQL
         $stmt->bindParam(':codigo', $codigo, PDO::PARAM_STR);
@@ -47,6 +47,7 @@
     <script type="text/javascript" src="../JS/main.js"></script>
 </head>
 <body>
+    <img class="logo" src="../IMG/Humberto_logo.png" alt="Logo de la empresa">
     <div id="log_Container" class="log_Container">
         <form method="post">
             <div class="contrasena">

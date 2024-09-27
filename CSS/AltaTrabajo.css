@@ -6,7 +6,9 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 10vh;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
     color: #333;
 }
 
@@ -17,7 +19,7 @@ img {
 h1 {
     font-size: 2.2rem;
     color: #333;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;
 }
@@ -29,11 +31,13 @@ form {
     align-items: center;
     width: 100%;
     max-width: 450px;
+    max-height: 90vh;
     margin: 0 auto;
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    overflow: auto;
 }
 
 /* Estilos para los selects e inputs de tiempo */
@@ -111,9 +115,11 @@ button.enviar:hover {
     border-radius: 10px;
     width: 90%;
     max-width: 500px;
+    max-height: 80vh;
     text-align: center;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     position: relative;
+    overflow: auto;
 }
 
 .modal-content h2 {
@@ -191,7 +197,8 @@ button.enviar:hover {
 /* Móviles (por defecto) */
 @media (max-width: 767px) {
     body {
-        padding: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
     }
 
     h1 {
@@ -216,9 +223,6 @@ button.enviar:hover {
 
 /* Tablets */
 @media (min-width: 768px) and (max-width: 1023px) {
-    body {
-        padding: 20px;
-    }
 
     h1 {
         font-size: 2rem;
@@ -236,9 +240,6 @@ button.enviar:hover {
 
 /* Ordenadores */
 @media (min-width: 1024px) {
-    body {
-        padding: 40px;
-    }
 
     h1 {
         font-size: 2.5rem;

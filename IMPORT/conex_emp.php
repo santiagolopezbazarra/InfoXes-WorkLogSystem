@@ -1,7 +1,7 @@
 <?php
     function connection(){
         $host = "localhost";
-        $db = "infoxes-worklogsystem";
+        $db = "humberto";
         $user = "root";
         $pass = "11051966";
         $charset = "utf8mb4";

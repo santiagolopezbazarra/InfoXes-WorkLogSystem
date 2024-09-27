@@ -10,8 +10,8 @@
         
     $conex = connection();
     
-    $sqlObra = "SELECT * FROM obra WHERE OB_ACTIVA = 1";
-    $sqlMaquinaria = "SELECT * FROM maquinaria WHERE MA_ACTIVA = 1";
+    $sqlObra = "SELECT * FROM obras WHERE ob_estado = 1";
+    $sqlMaquinaria = "SELECT * FROM maquinaria WHERE ma_estado = 1";
 
     try {
         //ejecución sql sobre tabla obra
@@ -46,7 +46,7 @@
             <option value="" disabled selected>Selecciona una obra</option>
             <?php
             foreach($obras as $obra) {
-                echo "<option value='" . htmlspecialchars($obra['OB_ID']) . "'>" . htmlspecialchars($obra['OB_NOMBRE']) . "</option>";
+                echo "<option value='" . htmlspecialchars($obra['ob_id']) . "'>" . htmlspecialchars($obra['ob_denominacion']) . "</option>";
             }
             ?>
         </select>
@@ -58,7 +58,7 @@
             <option value="" disabled selected>Selecciona una maquina</option>
             <?php
             foreach($maquinarias as $maquinaria) {
-                echo "<option value='" . htmlspecialchars($maquinaria['MA_ID']) . "'>" . htmlspecialchars($maquinaria['MA_NOMBRE']) . "</option>";
+                echo "<option value='" . htmlspecialchars($maquinaria['ma_id']) . "'>" . htmlspecialchars($maquinaria['ma_denominacion']) . "</option>";
             }
             ?>
         </select>
@@ -83,6 +83,7 @@
     <div id="modalResultado" class="modal">
         <div class="modal-content">
             <h2 id="mensajeResultado"></h2>
+            <p id="descripcionResultado"></p>
             <button id="closeResultado">Cerrar</button>
         </div>
     </div>

@@ -11,7 +11,7 @@
         $horaEntrada = $_POST['horaEntrada'];
         $horaSalida = $_POST['horaSalida'];
         $observaciones = !empty($_POST['observaciones']) ? $_POST['observaciones'] : null;
-        $empleado = $_SESSION['usuario']['EM_ID']; // ID del empleado desde la sesión actual
+        $trabajador = $_SESSION['usuario']['tr_id']; // ID del empleado desde la sesión actual
 
         // Obtener la fecha actual y la hora del registro
         $fecha = date("Y-m-d");
@@ -22,15 +22,15 @@
             exit();    
         }
 
-        $validacion = validar_nuevo_fichaje($empleado, $horaEntrada, $horaSalida, $fecha);
+        $validacion = validar_nuevo_fichaje($trabajador, $horaEntrada, $horaSalida, $fecha);
 
         if($validacion === "CORRECTO") {
             // Conexión a la base de datos
             $conex = connection();
     
             // SQL para insertar los datos en la tabla "registro_trabajo"
-            $sqlInsert = "INSERT INTO registro_trabajo (RT_FECHA, RT_HENTRADA, RT_HSALIDA, RT_OBSERVACION, RT_EMPLEADO, RT_OBRA, RT_MAQUINARIA, RT_HREGISTRO)
-                          VALUES (:fecha, :horaEntrada, :horaSalida, :observaciones, :empleado, :obra, :maquinaria, :horaRegistro)";
+            $sqlInsert = "INSERT INTO registro_trabajo (rt_fecha, rt_hentrada, rt_hsalida, rt_observaciones, rt_trabajador, rt_obra, rt_maquinaria, rt_hregistro)
+                          VALUES (:fecha, :horaEntrada, :horaSalida, :observaciones, :trabajador, :obra, :maquinaria, :horaRegistro)";
     
             try {
                 // Preparar la consulta
@@ -41,7 +41,7 @@
                 $stmt->bindParam(':horaEntrada', $horaEntrada);
                 $stmt->bindParam(':horaSalida', $horaSalida);
                 $stmt->bindParam(':observaciones', $observaciones);
-                $stmt->bindParam(':empleado', $empleado);
+                $stmt->bindParam(':trabajador', $trabajador);
                 $stmt->bindParam(':obra', $obra);
                 $stmt->bindParam(':maquinaria', $maquinaria);
                 $stmt->bindParam(':horaRegistro', $horaRegistro);
@@ -122,24 +122,24 @@
         return false; // No hay solapamiento parcial
     }
 
-    function obtener_fichajes_del_dia($empleado, $fecha) {
+    function obtener_fichajes_del_dia($trabajador, $fecha) {
         $conex = connection();
-        $sql = "SELECT RT_HENTRADA, RT_HSALIDA FROM registro_trabajo WHERE RT_EMPLEADO = :empleado AND RT_FECHA = :fecha ORDER BY RT_HENTRADA ASC;";
+        $sql = "SELECT rt_hentrada, rt_hsalida FROM registro_trabajo WHERE rt_trabajador = :trabajador AND rt_fecha = :fecha ORDER BY rt_hentrada ASC;";
 
         $stmt = $conex->prepare($sql);
-        $stmt->bindParam(':empleado', $empleado);
+        $stmt->bindParam(':trabajador', $trabajador);
         $stmt->bindParam(':fecha', $fecha);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    function validar_nuevo_fichaje($empleado, $horaEntrada, $horaSalida, $fecha) {
-        $fichajes = obtener_fichajes_del_dia($empleado, $fecha);
+    function validar_nuevo_fichaje($trabajador, $horaEntrada, $horaSalida, $fecha) {
+        $fichajes = obtener_fichajes_del_dia($trabajador, $fecha);
 
         foreach($fichajes as $fichaje) {
-            $entrada_existente = $fichaje['RT_HENTRADA'];
-            $salida_existente = $fichaje['RT_HSALIDA'];
+            $entrada_existente = $fichaje['rt_hentrada'];
+            $salida_existente = $fichaje['rt_hsalida'];
 
             if (fichaje_dentro_de_otro($entrada_existente, $salida_existente, $horaEntrada, $horaSalida)) {
                 return "ERROR_FICHAJE_DENTRO_OTRO";
