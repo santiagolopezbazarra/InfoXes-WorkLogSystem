@@ -43,6 +43,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INFOXES</title>
+    <link rel="shortcut icon" href="../IMG/Humberto_logo_recortado.png" mce_href="favicon.icon" type="image/x-icon"/>
     <link rel="stylesheet" href="../CSS/InicioSesion.css">
     <script type="text/javascript" src="../JS/main.js"></script>
 </head>
