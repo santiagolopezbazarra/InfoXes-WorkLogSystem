@@ -2,11 +2,23 @@
     session_start();
     include('../IMPORT/conex_emp.php');
 
+    $tiempoSesion = 15 * 60;
+
     if (!isset($_SESSION['usuario'])) {
         // Redirigir a la página de inicio de sesión si no hay una sesión activa
         header("Location: InicioSesion.php");
         exit();
+    } else {
+        if (isset($_SESSION['ultimo_acceso']) && (time() - $_SESSION['ultimo_acceso']) > $tiempoSesion) {
+            // Si ha pasado el tiempo de inactividad, destruir la sesión y redirigir
+            session_unset();
+            session_destroy();
+            header("Location: InicioSesion.php");
+            exit();
+        }
     }
+
+    $_SESSION['ultimo_acceso'] = time();
         
     $conex = connection();
     
@@ -39,7 +51,30 @@
 <body onload="cargarDia()">
     <img src="../IMG/Humberto_logo.png" alt="Logo de la empresa">
     <h1 id="elementoFecha"></h1>
+    <?php
+        $trabajador = $_SESSION['usuario']['tr_id'];
 
+        // Preparar y ejecutar la consulta
+        $sqlSession = "SELECT tr_nombre FROM trabajadores WHERE tr_id = :trabajador";
+        $stmt = $conex->prepare($sqlSession);
+        $stmt->bindParam(':trabajador', $trabajador, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            // Fetch the result as an associative array
+            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            // Verifica si se obtuvo algún resultado
+            if ($resultado) {
+                echo "<h2 class='nombreUsuario'>" . htmlspecialchars($resultado['tr_nombre']) . "</h2>";
+            } else {
+            header("Location: InicioSesion.php");
+            exit();
+            }
+        } else {
+            header("Location: InicioSesion.php");
+            exit();
+        }
+    ?>
     <!-- Formulario para el registro de datos -->
     <form action="../IMPORT/procesar_registro.php" method="POST">
         <select name="obra" id="obras" required>
@@ -78,6 +113,8 @@
             </div>
         </div>
     </form>
+
+    <button type="button" class="cerrarSesion" onclick="window.location.href='../IMPORT/logout.php'">CERRAR SESIÓN</button>
 
     <!--Estructura modal registro completado/fallido-->
     <div id="modalResultado" class="modal">
