@@ -18,7 +18,7 @@
         $horaRegistro = date("H:i:s");
 
         if (!validar_fichaje($horaEntrada, $horaSalida)) {
-            header("Location: ../pages/views/AltaTrabajo.php?status=error");
+            header("Location: ../pages/views/alta_trabajo.php?status=error");
             exit();    
         }
 
@@ -50,29 +50,29 @@
                 if ($stmt->execute()) {
                     echo "Registro guardado correctamente.";
                     // Aquí puedes redirigir al usuario a una página de confirmación si es necesario.
-                    header("Location: ../pages/views/AltaTrabajo.php?status=success");
+                    header("Location: ../pages/views/alta_trabajo.php?status=success");
                     exit();
                 } else {
                     echo "Error al guardar el registro.";
-                    header("Location: ../pages/views/AltaTrabajo.php?status=error");
+                    header("Location: ../pages/views/alta_trabajo.php?status=error");
                     exit();
                 }
     
             } catch (PDOException $e) {
                 echo "Error: " . $e->getMessage();
-                header("Location: ../pages/views/AltaTrabajo.php?status=error");
+                header("Location: ../pages/views/alta_trabajo.php?status=error");
                 exit();
             }
         } else if ($validacion === "ERROR_FICHAJE_DENTRO_OTRO") {
-            header("Location: ../pages/views/AltaTrabajo.php?status=errorFichajeDentroOtro");
+            header("Location: ../pages/views/alta_trabajo.php?status=errorFichajeDentroOtro");
             exit();    
         } else if ($validacion === "ERROR_FICHAJE_SOLAPADO") {
-            header("Location: ../pages/views/AltaTrabajo.php?status=errorFichajeSolapado");
+            header("Location: ../pages/views/alta_trabajo.php?status=errorFichajeSolapado");
             exit();
         }
     } else {
         echo "Método de solicitud no válido.";
-        header("Location: ../pages/views/AltaTrabajo.php?status=error");
+        header("Location: ../pages/views/alta_trabajo.php?status=error");
         exit();
     }
 

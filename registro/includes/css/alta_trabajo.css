@@ -7,7 +7,7 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    margin: 0;
+    margin: 20px;
     padding: 0;
     color: #333;
 }
@@ -20,12 +20,12 @@ h1 {
     font-size: 2.2rem;
     color: #333;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     text-align: center;
 }
 
 .nombreUsuario {
-    color: rgb(255, 0, 0);
+    color: rgb(175, 0, 0);
 }
 
 /* Estilo del formulario */
@@ -219,6 +219,10 @@ button.cerrarSesion:hover {
 
     h1 {
         font-size: 1.8rem;
+    }
+
+    .nombreUsuario {
+        font-size: 1.25rem;
     }
 
     select, input[type="time"], button {

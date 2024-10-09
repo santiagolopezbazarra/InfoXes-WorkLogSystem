@@ -46,7 +46,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../img/humberto_logo_recortado.png" mce_href="favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="../../includes/css/alta_trabajo.css">
-    <script type="text/javascript" src="../../includes/js/alta_trabajo.js"></script>
     <title>INFOXES</title>
 </head>
 <body onload="cargarDia()">
@@ -105,8 +104,7 @@
 
         <button type="button" class="observaciones" id="botonObservaciones">OBSERVACIONES</button>
         <button type="submit" class="enviar">ENVIAR</button>
-        <button type="button" class="cerrarSesion" onclick="window.location.href='../../includes/logout_trabajador.php'">CERRAR SESIÓN</button>
-
+        
         <!-- Estructura del modal -->
         <div id="modal" class="modal">
             <div class="modal-content">
@@ -126,5 +124,9 @@
             <button id="closeResultado">Cerrar</button>
         </div>
     </div>
+
+    <button type="button" class="cerrarSesion" onclick="window.location.href='../../includes/logout_trabajador.php'">CERRAR SESIÓN</button>
+    
+    <script src="../../includes/js/alta_trabajo.js"></script>
 </body>
 </html>

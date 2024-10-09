@@ -29,7 +29,7 @@
             print_r($_SESSION['usuario']);
             echo "</pre>";
             // Después de depurar, puedes redirigir
-            header("Location: alta_tabajo.php");
+            header("Location: alta_trabajo.php");
             exit();
         } else {
             // Usuario no encontrado, mostrar mensaje de error
