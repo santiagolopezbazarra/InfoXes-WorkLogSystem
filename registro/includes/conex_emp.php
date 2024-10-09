@@ -1,9 +1,9 @@
 <?php
     function connection(){
         $host = "localhost";
-        $db = "tabi13_humberto";
-        $user = "tabi13_humberto";
-        $pass = "enmmqYxDVx5rt8hZ9Smp";
+        $db = "humberto";
+        $user = "root";
+        $pass = "11051966";
         $charset = "utf8mb4";
         
         $dsn = "mysql:host=$host;dbname=$db;charset=$charset";

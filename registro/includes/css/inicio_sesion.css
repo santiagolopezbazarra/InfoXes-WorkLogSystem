@@ -1,6 +1,6 @@
 /* Estilo general */
 body {
-    background-image: url("../IMG/pattern.svg");
+    background-image: url("../../img/pattern.svg");
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
     display: flex;
@@ -53,7 +53,7 @@ body {
     top: 50%;
     right: 10px;
     transform: translateY(-50%);
-    background: url('../IMG/show.svg') no-repeat center center;
+    background: url('../../img/show.svg') no-repeat center center;
     background-size: contain;
     width: 24px;
     height: 24px;
@@ -62,7 +62,7 @@ body {
 }
 
 .toggle.showing {
-    background: url('../IMG/hide.svg') no-repeat center center;
+    background: url('../../img/hide.svg') no-repeat center center;
     background-size: contain;
 }
 

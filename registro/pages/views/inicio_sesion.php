@@ -29,7 +29,7 @@
             print_r($_SESSION['usuario']);
             echo "</pre>";
             // Después de depurar, puedes redirigir
-            header("Location: AltaTrabajo.php");
+            header("Location: alta_tabajo.php");
             exit();
         } else {
             // Usuario no encontrado, mostrar mensaje de error
@@ -43,9 +43,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INFOXES</title>
-    <link rel="shortcut icon" href="../../img/logo_principal.png" mce_href="favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" href="../../includes/css/InicioSesion.css">
-    <script type="text/javascript" src="../../includes/js/main.js"></script>
+    <link rel="shortcut icon" href="../../img/humberto_logo_recortado.png" mce_href="favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="../../includes/css/inicio_sesion.css">
+    <script type="text/javascript" src="../../includes/js/ver_password.js"></script>
 </head>
 <body>
     <img class="logo" src="../../img/logo_principal.png" alt="Logo de la empresa">

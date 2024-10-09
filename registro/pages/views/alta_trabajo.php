@@ -6,14 +6,14 @@
 
     if (!isset($_SESSION['usuario'])) {
         // Redirigir a la página de inicio de sesión si no hay una sesión activa
-        header("Location: iniciosesion.php");
+        header("Location: inicio_sesion.php");
         exit();
     } else {
         if (isset($_SESSION['ultimo_acceso']) && (time() - $_SESSION['ultimo_acceso']) > $tiempoSesion) {
             // Si ha pasado el tiempo de inactividad, destruir la sesión y redirigir
             session_unset();
             session_destroy();
-            header("Location: iniciosesion.php");
+            header("Location: inicio_sesion.php");
             exit();
         }
     }
@@ -44,8 +44,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../../img/logo_principal.png" mce_href="favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" href="../../includes/css/AltaTrabajo.css">
+    <link rel="shortcut icon" href="../../img/humberto_logo_recortado.png" mce_href="favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="../../includes/css/alta_trabajo.css">
+    <script type="text/javascript" src="../../includes/js/alta_trabajo.js"></script>
     <title>INFOXES</title>
 </head>
 <body onload="cargarDia()">
@@ -68,11 +69,11 @@
             if ($resultado) {
                 echo "<h2 class='nombreUsuario'>" . htmlspecialchars($resultado['tr_nombre']) . "</h2>";
             } else {
-            header("Location: iniciosesion.php");
+            header("Location: inicio_sesion.php");
             exit();
             }
         } else {
-            header("Location: iniciosesion.php");
+            header("Location: inicio_sesion.php");
             exit();
         }
     ?>
@@ -125,7 +126,5 @@
             <button id="closeResultado">Cerrar</button>
         </div>
     </div>
-
-    <script src="../../includes/js/AltaTrabajo.js"></script>
 </body>
 </html>
