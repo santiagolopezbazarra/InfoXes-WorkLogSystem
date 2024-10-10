@@ -54,12 +54,42 @@ select, input[type="time"], textarea {
     font-size: 1rem;
     background-color: #ffffff;
     box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
     transition: border-color 0.3s ease;
 }
 
 select:focus, input[type="time"]:focus, textarea:focus {
     border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3); /* Sombra más visible */
     outline: none;
+}
+
+.horaEntrada::before {
+    content: 'Hora Entrada'; /* Color similar al placeholder */
+}
+
+.horaSalida::before {
+    content: 'Hora Salida';
+}
+
+input[type="time"]::before {
+    color: #9d9d9d;
+    font-family: 'Roboto', Arial, sans-serif;
+    position: absolute;
+    background: #fff;
+    opacity: 1; /* Valor inicial */
+    transition: all 0.3s ease; /* Transición suave de 0.3 segundos */
+    pointer-events: none; /* Evita que interfiera con el input */
+    padding-left: 5px;
+    padding-top: 2px;
+}
+
+input[input="time"]:focus::before {
+    opacity: 0;
+}
+
+input[type="time"]:hover::before {
+    content: '';
 }
 
 /* Evitar redimensionamiento de textarea */

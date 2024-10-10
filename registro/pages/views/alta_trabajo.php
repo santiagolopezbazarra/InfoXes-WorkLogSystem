@@ -88,8 +88,8 @@
             ?>
         </select>
 
-        <input type="time" name="horaEntrada" id="horaEntrada" required>
-        <input type="time" name="horaSalida" id="horaSalida" required>
+        <input type="time" name="horaEntrada" class="horaEntrada" id="horaEntrada" required>
+        <input type="time" name="horaSalida" class="horaSalida" id="horaSalida" required>
 
         <select name="maquinaria" id="maquinas" required>
             <option value="" disabled selected>Selecciona una maquina</option>
