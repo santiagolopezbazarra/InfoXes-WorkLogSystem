@@ -4,6 +4,6 @@
     session_destroy(); // Destruye la sesión actual
 
     // Redirigir al usuario a la página de inicio de sesión o cualquier otra página
-    header("Location: ../pages/views/iniciosesion.php");
+    header("Location: ../pages/views/inicio_sesion.php");
     exit();
 ?>

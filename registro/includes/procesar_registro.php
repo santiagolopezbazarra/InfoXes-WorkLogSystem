@@ -1,6 +1,7 @@
 <?php
     session_start();
     include('conex_emp.php');
+    include('obtener_ip.php');
 
     date_default_timezone_set("Europe/Madrid");
 
@@ -12,6 +13,7 @@
         $horaSalida = $_POST['horaSalida'];
         $observaciones = !empty($_POST['observaciones']) ? $_POST['observaciones'] : null;
         $trabajador = $_SESSION['usuario']['tr_id']; // ID del empleado desde la sesión actual
+        $ip = getUserIp();
 
         // Obtener la fecha actual y la hora del registro
         $fecha = date("Y-m-d");
@@ -29,8 +31,8 @@
             $conex = connection();
     
             // SQL para insertar los datos en la tabla "registro_trabajo"
-            $sqlInsert = "INSERT INTO registro_trabajo (rt_fecha, rt_hentrada, rt_hsalida, rt_observaciones, rt_trabajador, rt_obra, rt_maquinaria, rt_hregistro)
-                          VALUES (:fecha, :horaEntrada, :horaSalida, :observaciones, :trabajador, :obra, :maquinaria, :horaRegistro)";
+            $sqlInsert = "INSERT INTO registro_trabajo (rt_fecha, rt_hentrada, rt_hsalida, rt_observaciones, rt_trabajador, rt_obra, rt_maquinaria, rt_hregistro, rt_ip)
+                          VALUES (:fecha, :horaEntrada, :horaSalida, :observaciones, :trabajador, :obra, :maquinaria, :horaRegistro, :ip);";
     
             try {
                 // Preparar la consulta
@@ -45,6 +47,7 @@
                 $stmt->bindParam(':obra', $obra);
                 $stmt->bindParam(':maquinaria', $maquinaria);
                 $stmt->bindParam(':horaRegistro', $horaRegistro);
+                $stmt->bindParam(':ip', $ip);
     
                 // Ejecutar la consulta
                 if ($stmt->execute()) {
