@@ -25,7 +25,7 @@ h1 {
 }
 
 .nombreUsuario {
-    color: rgb(175, 0, 0);
+    color: #b22222; /* Color más formal */
 }
 
 /* Estilo del formulario */
@@ -55,7 +55,7 @@ select, input[type="time"], textarea {
     background-color: #ffffff;
     box-sizing: border-box;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 select:focus, input[type="time"]:focus, textarea:focus {
@@ -99,41 +99,44 @@ button {
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
     width: 100%;
     margin: 12px 0;
 }
 
 /* Botón de Observaciones */
 button.observaciones {
-    background-color: #298900; /* Color principal */
+    background-color: #310055; /* Color más formal */
     color: white;
 }
 
 button.observaciones:hover {
-    background-color: #195400; /* Color más oscuro al hacer hover */
+    background-color: #170029; /* Color más oscuro al hacer hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Botón de Enviar */
 button.enviar {
-    background-color: #0014cd;
+    background-color: #054a00; /* Color más formal */
     color: white;
 }
 
 button.enviar:hover {
-    background-color: #000b69; /* Color más oscuro al hacer hover */
+    background-color: #011600; /* Color más oscuro al hacer hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 button.cerrarSesion {
     font-size: 15px;
     margin-top: 20px;
     max-width: 175px;
-    background-color: rgb(160, 0, 0);
+    background-color: #8b0000; /* Color más formal */
     color: white;
 }
 
 button.cerrarSesion:hover {
-    background-color: rgb(90, 0, 0);
+    background-color: #5a0000; /* Color más oscuro al hacer hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .modal {
@@ -189,7 +192,7 @@ button.cerrarSesion:hover {
 }
 
 .modal-content button {
-    background-color: #0014cd;
+    background-color: #2f4f4f; /* Color más formal */
     color: white;
     padding: 12px 20px;
     border: none;
@@ -200,7 +203,8 @@ button.cerrarSesion:hover {
 }
 
 .modal-content button:hover {
-    background-color: #000b69;
+    background-color: #1f3f3f; /* Color más oscuro al hacer hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Botón de cerrar */
@@ -220,7 +224,7 @@ button.cerrarSesion:hover {
 }
 
 #modalResultado button {
-    background-color: #0014cd;
+    background-color: #2f4f4f; /* Color más formal */
     color: white;
     padding: 12px 20px;
     border: none;
@@ -231,7 +235,8 @@ button.cerrarSesion:hover {
 }
 
 #modalResultado button:hover {
-    background-color: #000b69;
+    background-color: #1f3f3f; /* Color más oscuro al hacer hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Estilos responsivos */
@@ -268,7 +273,6 @@ button.cerrarSesion:hover {
 
 /* Tablets */
 @media (min-width: 768px) and (max-width: 1023px) {
-
     h1 {
         font-size: 2rem;
     }
@@ -285,7 +289,6 @@ button.cerrarSesion:hover {
 
 /* Ordenadores */
 @media (min-width: 1024px) {
-
     h1 {
         font-size: 2.5rem;
     }
